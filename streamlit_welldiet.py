@@ -2,13 +2,12 @@ import streamlit as st
 st.title('Well Diet')
 st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
 st.caption('by :blue[INVITRACE]')
-st.write('by INVITRACE')
+
 st.selectbox('Gender',['Male','Female'])
 st.slider('Age', 18,120)
 st.number_input('Current Weight (kg)')
 st.number_input('Height (cm)')
 st.number_input('Waist (inches)')
-
 st.number_input('Triglyceride (mg/dL)')
 st.number_input('HDL (mg/dL)')
 st.number_input('FBS (mg/dL)')
