@@ -1,13 +1,35 @@
 import streamlit as st
 st.title('Well Diet')
-st.header('NCDs Risk Detection and Lifestyle Modification Therapy')
+st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
 
 st.selectbox('Gender',['Male','Female'])
-st.number_input('Age', 18,120)
-st.number_input('Current Weight', 30,300)
+st.number_input('Age')
+st.number_input('Current Weight')
 st.number_input('Height')
 st.number_input('Waist')
 
+st.number_input('Triglyceride')
+st.number_input('HDL')
+st.number_input('FBS')
+st.number_input('ค่าน้ำตาลปลายนี้ว หลังอดอาหาร \n###(ถ้ามี)')
+st.number_input('Systolic Blood Pressure')
+st.number_input('Diastolic Blood Pressure')
+st.number_input('Total Cholesteral')
+st.number_input('LDL')
+st.number_input('ค่าน้ำตาล หลังทานอาหาร 2 ชั่วโมง\n###(ถ้ามี)')
+st.number_input('HbA1c')
+
+
+# TG = 100
+# HDL = 50
+# FBS = 90
+# fastingDTX = 0                      #ถ้ามี
+# SBP = 92
+# DBP = 53
+# TC = 100
+# LDL = 98
+# twoHr_postprandial = 0              #ถ้ามี
+# HbA1c = 0         
 # st.checkbox('yes')
 
 # st.radio('Pick your gender',['Male','Female'])
