@@ -738,40 +738,77 @@ def is_must_lifestylemodification_CVD():
             return "don't need to "
     else : pass
 
+# if age>=18 :
+#     print("======BMI======")
+#     print("BMI = ",round(BMI_calculation (weight,height),2))
+#     print("BMI Class = ",BMI_classification(BMI_calculation (weight,height)))
+#     print("Weight management plan = ",is_must_weight_managment(BMI_calculation (weight,height)))
+#     print("\n")
+#     print("======DM======")
+#     print("is DM = ",is_DM())
+#     if is_DM() == False: #ไม่เป็นเบาหวาน ความเสี่ยงต้องโชว์ 
+#         print("Risk factor DM =" ,risk_factor_DM(BMI_calculation(weight,height)))
+#         print("Risk score DM =" ,risk_score_DM(BMI_calculation(weight,height)))
+#         if (risk_score_DM(BMI_calculation(weight,height)) is not None) :   #if the 'risk_score_DM' has a value
+#             print("ระดับความเสี่ยงต่อโรคเบาหวานใน 12 ปีข้างหน้า ของท่าน ",converter_score_to_percentrisk_DM(risk_score_DM(BMI_calculation(weight,height))))
+#     else: pass  #เป็นเบาหวาน ความเสี่ยงต้องไม่โชว์ 
+#     print(Lab_fasting_DM())
+#     print("DM Lifestyle modification = ",is_must_lifestylemodification_DM())
+#     print("\n")
+#     print("======HT======")
+#     print("HT classification = ",HT_classification(SBP,DBP)[0])
+#     print("Risk score HT = ",risk_score_HT())
+#     if risk_score_HT() is not None :
+#         print(f"Predict 4-year hypertension risk: {converter_score_to_percentrisk_HT(risk_score_HT())[0]}%")
+#         print(f"Risk level of HT: {converter_score_to_percentrisk_HT(risk_score_HT())[1]}")
+#     else: pass
+#     print("HT Lifestyle modification = ",is_must_lifestylemodification_HT())
+#     print("\n")
+#     print("======CVD======")
+#     if age >=20:
+#         if is_CHD == False:
+#             print("Risk factor CVD = ",risk_factor_CVD())
+#             print("Risk score CVD = ",risk_score_CVD())
+#             if risk_score_CVD() is not None :
+#                 print(f"Predict 10-year CVD risk: {converter_score_to_percentrisk_CVD(risk_score_CVD())}%")
+#         print("CVD Lifestyle modification = ",is_must_lifestylemodification_CVD())
+#     else: print("CVD Lifestyle modification = ",is_must_lifestylemodification_CVD())
+# else: pass
+
+
 if age>=18 :
-    print("======BMI======")
-    print("BMI = ",round(BMI_calculation (weight,height),2))
-    print("BMI Class = ",BMI_classification(BMI_calculation (weight,height)))
-    print("Weight management plan = ",is_must_weight_managment(BMI_calculation (weight,height)))
-    print("\n")
-    print("======DM======")
-    print("is DM = ",is_DM())
+    st.subheader("======BMI======")
+    st.markdown("BMI = ",round(BMI_calculation (weight,height),2))
+    st.markdown("BMI Class = ",BMI_classification(BMI_calculation (weight,height)))
+    st.markdown("Weight management plan = ",is_must_weight_managment(BMI_calculation (weight,height)))
+    st.markdown("\n")
+    st.subheader("======DM======")
+    st.markdown("is DM = ",is_DM())
     if is_DM() == False: #ไม่เป็นเบาหวาน ความเสี่ยงต้องโชว์ 
-        print("Risk factor DM =" ,risk_factor_DM(BMI_calculation(weight,height)))
-        print("Risk score DM =" ,risk_score_DM(BMI_calculation(weight,height)))
+        st.markdown("Risk factor DM =" ,risk_factor_DM(BMI_calculation(weight,height)))
+        st.markdown("Risk score DM =" ,risk_score_DM(BMI_calculation(weight,height)))
         if (risk_score_DM(BMI_calculation(weight,height)) is not None) :   #if the 'risk_score_DM' has a value
-            print("ระดับความเสี่ยงต่อโรคเบาหวานใน 12 ปีข้างหน้า ของท่าน ",converter_score_to_percentrisk_DM(risk_score_DM(BMI_calculation(weight,height))))
+            st.markdown("ระดับความเสี่ยงต่อโรคเบาหวานใน 12 ปีข้างหน้า ของท่าน ",converter_score_to_percentrisk_DM(risk_score_DM(BMI_calculation(weight,height))))
     else: pass  #เป็นเบาหวาน ความเสี่ยงต้องไม่โชว์ 
-    print(Lab_fasting_DM())
-    print("DM Lifestyle modification = ",is_must_lifestylemodification_DM())
-    print("\n")
-    print("======HT======")
-    print("HT classification = ",HT_classification(SBP,DBP)[0])
-    print("Risk score HT = ",risk_score_HT())
+    st.markdown(Lab_fasting_DM())
+    st.markdown("DM Lifestyle modification = ",is_must_lifestylemodification_DM())
+    st.markdown("\n")
+    st.subheader("======HT======")
+    st.markdown("HT classification = ",HT_classification(SBP,DBP)[0])
+    st.markdown("Risk score HT = ",risk_score_HT())
     if risk_score_HT() is not None :
-        print(f"Predict 4-year hypertension risk: {converter_score_to_percentrisk_HT(risk_score_HT())[0]}%")
-        print(f"Risk level of HT: {converter_score_to_percentrisk_HT(risk_score_HT())[1]}")
+        st.markdown(f"Predict 4-year hypertension risk: {converter_score_to_percentrisk_HT(risk_score_HT())[0]}%")
+        st.markdown(f"Risk level of HT: {converter_score_to_percentrisk_HT(risk_score_HT())[1]}")
     else: pass
-    print("HT Lifestyle modification = ",is_must_lifestylemodification_HT())
-    print("\n")
-    print("======CVD======")
+    st.markdown("HT Lifestyle modification = ",is_must_lifestylemodification_HT())
+    st.markdown("\n")
+    st.subheader("======CVD======")
     if age >=20:
         if is_CHD == False:
-            print("Risk factor CVD = ",risk_factor_CVD())
-            print("Risk score CVD = ",risk_score_CVD())
+            st.markdown("Risk factor CVD = ",risk_factor_CVD())
+            st.markdown("Risk score CVD = ",risk_score_CVD())
             if risk_score_CVD() is not None :
-                print(f"Predict 10-year CVD risk: {converter_score_to_percentrisk_CVD(risk_score_CVD())}%")
-        print("CVD Lifestyle modification = ",is_must_lifestylemodification_CVD())
-    else: print("CVD Lifestyle modification = ",is_must_lifestylemodification_CVD())
+                st.markdown(f"Predict 10-year CVD risk: {converter_score_to_percentrisk_CVD(risk_score_CVD())}%")
+        st.markdown("CVD Lifestyle modification = ",is_must_lifestylemodification_CVD())
+    else: st.markdown("CVD Lifestyle modification = ",is_must_lifestylemodification_CVD())
 else: pass
-
