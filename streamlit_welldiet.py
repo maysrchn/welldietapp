@@ -18,16 +18,25 @@ TC = st.number_input('Total Cholesteral (mg/dL)')
 LDL = st.number_input('LDL (mg/dL)')
 twoHr_postprandial = st.number_input('ค่าน้ำตาล หลังทานอาหาร 2 ชั่วโมง  (mg/dL) (ถ้ามี)')
 HbA1c = st.number_input('HbA1c (%) (ถ้ามี)')
+mapping = {
+    "Yes": True,
+    "No": False,
+    "ไม่มีใครเป็น": 0,
+    "เป็น 1 คน": 1,
+    "เป็นทั้งพ่อทั้งแม่": 2
+}
+
 family_DM = st.radio(
     "มี พ่อ แม่ พี่ หรือ น้อง เป็นโรคเบาหวาน?",
-    ("Yes", "No"),
-    (True, False)
+    ("Yes", "No")
 )                  #มี พ่อ แม่ พี่ หรือ น้อง เป็นโรคเบาหวาน
+family_DM = mapping[family_DM]
+
 family_HT = st.radio(
     "มี พ่อ แม่ เป็นโรคความดันโลหิตสูง?",
     ("ไม่มีใครเป็น","เป็น 1 คน", "เป็นทั้งพ่อทั้งแม่"),
-    (0, 1, 2)
 )                           #0 คน / พ่อหรือแม่ 1 คน / ทั้งพ่อทั้งแม่ 2 คน
+family_HT = mapping[family_HT]
 # family_CHD = False                   #พ่อแม่ พี่ น้อง มีโรค CHD ชายอายุ<55 ปี หญิง อายุ<65 ปี
 # is_HT = False                       #เป็นโรคความดันโลหิตสูงหรือไม่
 # is_HT_medicinetreat = False         #กำลังรับประทานยาควบคุมความดันโลหิตสูงหรือไม่
