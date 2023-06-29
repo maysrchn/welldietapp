@@ -2,46 +2,46 @@ import streamlit as st
 st.title('Well Diet')
 st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
 st.caption('by :blue[INVITRACE] เมย์ สรัลชนา')
+ #INPUT
+gender = st.selectbox('Gender',['Male','Female'])
+age = st.slider('Age', 18,120)
+current_weight = st.number_input('Current Weight (kg)')
+height = st.number_input('Height (cm)')
+waist = st.number_input('Waist (inches)')
+TG = st.number_input('Triglyceride (mg/dL)')
+HDL = st.number_input('HDL (mg/dL)')
+FBS = st.number_input('FBS (mg/dL)')
+fastingDTX =st.number_input('ค่าน้ำตาลปลายนี้ว หลังอดอาหาร (mg/dL) (ถ้ามี)')
+SBP = st.number_input('Systolic Blood Pressure (mmHg)')
+DBP = st.number_input('Diastolic Blood Pressure (mmHg)')
+TC = st.number_input('Total Cholesteral (mg/dL)')
+LDL = st.number_input('LDL (mg/dL)')
+twoHr_postprandial = st.number_input('ค่าน้ำตาล หลังทานอาหาร 2 ชั่วโมง  (mg/dL) (ถ้ามี)')
+HbA1c = st.number_input('HbA1c (%) (ถ้ามี)')
+family_DM = st.radio(
+    "มี พ่อ แม่ พี่ หรือ น้อง เป็นโรคเบาหวาน?",
+    ("Yes", "No"),
+    (True, False)
+)                  #มี พ่อ แม่ พี่ หรือ น้อง เป็นโรคเบาหวาน
+family_HT = st.radio(
+    "มี พ่อ แม่ เป็นโรคความดันโลหิตสูง?",
+    ("ไม่มีใครเป็น","เป็น 1 คน", "เป็นทั้งพ่อทั้งแม่"),
+    (0, 1, 2)
+)                           #0 คน / พ่อหรือแม่ 1 คน / ทั้งพ่อทั้งแม่ 2 คน
+# family_CHD = False                   #พ่อแม่ พี่ น้อง มีโรค CHD ชายอายุ<55 ปี หญิง อายุ<65 ปี
+# is_HT = False                       #เป็นโรคความดันโลหิตสูงหรือไม่
+# is_HT_medicinetreat = False         #กำลังรับประทานยาควบคุมความดันโลหิตสูงหรือไม่
+# history_GDM_Macrosomia =False       #มีประวัติเป็นโรคเบาหวานขณะตั้งครรภ์หรือเคยคลอดบุตรน้ำหนักเกิน 4 กิโลกรัม
+# history_impaired_glucose = False    #เคยได้รับการตรวจพบว่าเป็น IGT หรือ IFG
+# is_CVD = False                     #มีโรคหัวใจและหลอดเลือด (cardiovascular disease)
+# is_PCOS = False                     #มีกลุ่มอาการถุงน้ำในรังไข่ ( polycystic ovarian syndrome )
+# is_smoke = False                     #คุณสูบบุหรี่หรือไม่
+# is_CHD = is_CVD                     #มีอาการ CHDไหม ให้ถือว่า CHD = CVD ATPIII ก็ไม่ต้องถามเรื่องCHD แล้ว
+# # # ห้ามอายุน้อยกว่า 18
 
-st.selectbox('Gender',['Male','Female'])
-st.slider('Age', 18,120)
-st.number_input('Current Weight (kg)')
-st.number_input('Height (cm)')
-st.number_input('Waist (inches)')
-st.number_input('Triglyceride (mg/dL)')
-st.number_input('HDL (mg/dL)')
-st.number_input('FBS (mg/dL)')
-st.number_input('ค่าน้ำตาลปลายนี้ว หลังอดอาหาร (mg/dL) (ถ้ามี)')
-st.number_input('Systolic Blood Pressure (mmHg)')
-st.number_input('Diastolic Blood Pressure (mmHg)')
-st.number_input('Total Cholesteral (mg/dL)')
-st.number_input('LDL (mg/dL)')
-st.number_input('ค่าน้ำตาล หลังทานอาหาร 2 ชั่วโมง  (mg/dL) (ถ้ามี)')
-st.number_input('HbA1c (%) (ถ้ามี)')
-
-
-# TG = 100
-# HDL = 50
-# FBS = 90
-# fastingDTX = 0                      #ถ้ามี
-# SBP = 92
-# DBP = 53
-# TC = 100
-# LDL = 98
-# twoHr_postprandial = 0              #ถ้ามี
-# HbA1c = 0         
-# st.checkbox('yes')
-
-# st.radio('Pick your gender',['Male','Female'])
-
-# st.multiselect('choose a planet',['Jupiter', 'Mars', 'neptune'])
-# st.select_slider('Pick a mark', ['Bad', 'Good', 'Excellent'])
-# st.slider('Pick a number', 0,50)
-
-# st.text_input('Email address')
-# st.date_input('Travelling date')
-
-
+# physical_activity="moderately active"
+# goal_weight=60
+# current_food_record= 1600   #kcal
 
 st.button('Click')
 
