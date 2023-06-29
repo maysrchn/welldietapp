@@ -89,7 +89,8 @@ is_CHD = is_CVD                     #มีอาการ CHDไหม ให�
 # goal_weight=60
 # current_food_record= 1600   #kcal
 
-st.button('Click')
+if st.button('Run'):
+    from welldiet_assessment import*
 
 #cd /Users/may/Desktop/welldiet.py/ 
 #streamlit run streamlit_welldiet.py
