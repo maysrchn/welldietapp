@@ -1,4 +1,4 @@
-from welldiet_input import*
+from streamlit_welldiet import*
 weight = current_weight
 # True = abnormal
 def waist_calculation (gender,waist):
