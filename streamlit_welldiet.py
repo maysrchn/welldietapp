@@ -3,7 +3,7 @@ st.title('Well Diet')
 st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
 
 st.selectbox('Gender',['Male','Female'])
- st.slider('AgePick a number', 18,120)
+st.slider('Age', 18,120)
 st.number_input('Current Weight')
 st.number_input('Height')
 st.number_input('Waist')
