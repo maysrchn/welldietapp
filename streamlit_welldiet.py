@@ -3,7 +3,7 @@ st.title('Well Diet')
 st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
 st.caption('by :blue[INVITRACE] เมย์ สรัลชนา')
  #INPUT
-gender = st.selectbox('Gender',['Male','Female'])
+gender = st.selectbox('Gender',['male','female'])
 age = st.slider('Age', 18,120)
 current_weight = st.number_input('Current Weight (kg)')
 height = st.number_input('Height (cm)')
