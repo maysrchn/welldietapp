@@ -1,7 +1,8 @@
 import streamlit as st
 st.title('Well Diet')
 st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
-
+st.caption('by :blue[INVITRACE]')
+st.write('by INVITRACE')
 st.selectbox('Gender',['Male','Female'])
 st.slider('Age', 18,120)
 st.number_input('Current Weight (kg)')
