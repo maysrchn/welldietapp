@@ -1,5 +1,5 @@
-from streamlit_welldiet import*
-weight = current_weight
+#current_weight = 10
+#weight = current_weight
 # True = abnormal
 def waist_calculation (gender,waist):
     if gender == "female" and waist >= 32 :
@@ -12,35 +12,35 @@ def BMI_calculation (weight,height) :
     BMI = weight/(height*0.01)**2
     return BMI
 
-def is_DM():
+def is_DM(FBS,twoHr_postprandial,HbA1c):
     if FBS >= 126 or twoHr_postprandial >=200 or HbA1c >=6.5:
         return True
     else : return False
 
 #Obesity
-def BMI_classification (BMI):
-    if BMI < 18.5 :
+def BMI_classification (weight,height):
+    if BMI_calculation (weight,height) < 18.5 :
         BMI_class = "Underweight"
-    elif 18.5 <= BMI <23 :
+    elif 18.5 <= BMI_calculation (weight,height) <23 :
         BMI_class = "Normal BMI"
-    elif 23 <= BMI <25 :
+    elif 23 <= BMI_calculation (weight,height) <25 :
         BMI_class = "Overweight"
-    elif 25 <= BMI <30 :
+    elif 25 <= BMI_calculation (weight,height) <30 :
         BMI_class = "Obesity class I"
-    elif BMI >=30 :
+    elif BMI_calculation (weight,height) >=30 :
         BMI_class = "Obesity class II"
     return BMI_class
 
-def is_must_weight_managment(BMI):
-    if BMI >=23:
+def is_must_weight_managment(weight,height):
+    if BMI_calculation (weight,height) >=23:
         return "Caloric Restriction"
-    if 18.5 <= BMI <23 :
+    if 18.5 <= BMI_calculation (weight,height) <23 :
         return "Stay Healthy Diet"
-    if BMI < 18.5 :
+    if BMI_calculation (weight,height) < 18.5 :
         return "Caloric Boost Up"
 #Diabetes
 #risk more than 1 from 8
-def risk_factor_DM(BMI):
+def risk_factor_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS):
     if age <18 :
         risk_count = None
     elif age >=18:
@@ -49,7 +49,7 @@ def risk_factor_DM(BMI):
         if age >= 35:
             risk_count += 1
         
-        if (BMI >= 25 or waist_calculation(gender, waist)) and family_DM:
+        if (BMI_calculation (weight,height) >= 25 or waist_calculation(gender, waist)) and family_DM:
             risk_count += 1
 
         if is_HT == True or is_HT_medicinetreat == True:
@@ -74,7 +74,7 @@ def risk_factor_DM(BMI):
 
 #DM risk score
 
-def risk_score_DM(BMI):
+def risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM):
     if age <34 :
         risk_score_DM_sum = None
     elif age >=34:
@@ -91,11 +91,11 @@ def risk_score_DM(BMI):
         elif gender == "male" :
             risk_score_DM_sum += 2
 
-        if  BMI < 23 :
+        if  BMI_calculation (weight,height) < 23 :
             risk_score_DM_sum += 0
-        elif 23 >= BMI < 27.5 :    
+        elif 23 >= BMI_calculation (weight,height) < 27.5 :    
             risk_score_DM_sum += 3
-        elif BMI >= 27.5 :    
+        elif BMI_calculation (weight,height) >= 27.5 :    
             risk_score_DM_sum += 5
 
         if waist_calculation (gender,waist) == False :
@@ -118,31 +118,31 @@ def risk_score_DM(BMI):
 
 
 #DM Lab result Fasting
-def Lab_fasting_DM():
+def Lab_fasting_DM(FBS,fastingDTX):
     lab_DM = ""
     if FBS >= 100 or fastingDTX >= 100 :
         lab_DM = "lab DM abnormal"
     else : lab_DM = "lab DM normal"
     return lab_DM
 
-def converter_score_to_percentrisk_DM(risk_score_DM_sum):
-    if 0 <= risk_score_DM_sum < 3 :
+def converter_score_to_percentrisk_DM(weight,height,age,gender,waist,is_HT,family_DM):
+    if 0 <= risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM) < 3 :
         percentrisk_DM = "น้อยกว่า 5%"
-    elif 3 <= risk_score_DM_sum < 6 :
+    elif 3 <= risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM) < 6 :
         percentrisk_DM = "เท่ากับ 5% - 10%"
-    elif 6 <= risk_score_DM_sum <= 8 :
+    elif 6 <= risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM) <= 8 :
         percentrisk_DM = "เท่ากับ 11% - 20%"
-    elif risk_score_DM_sum > 8 :
+    elif risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM) > 8 :
         percentrisk_DM = "มากกว่า 11% - 20%"
     return percentrisk_DM
 
-def is_must_lifestylemodification_DM():
+def is_must_lifestylemodification_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS,FBS,fastingDTX):
     if age>=34 :
-        if risk_factor_DM(BMI_calculation(weight,height)) > 0 or risk_score_DM(BMI_calculation(weight,height)) >= 6 or Lab_fasting_DM() == "lab DM abnormal":
+        if risk_factor_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS) > 0 or risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM) >= 6 or Lab_fasting_DM(FBS,fastingDTX) == "lab DM abnormal":
             return "must"
         else : return "don't need to"
     if age < 34 :
-        if risk_factor_DM(BMI_calculation(weight,height)) > 0 or Lab_fasting_DM() == "lab DM abnormal":
+        if risk_factor_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS) > 0 or Lab_fasting_DM(FBS,fastingDTX) == "lab DM abnormal":
             return "must"
         else : return "don't need to"
 
@@ -150,7 +150,7 @@ def is_must_lifestylemodification_DM():
 
 #Hypertension
 
-def HT_classification(SBP,DBP):
+def HT_classification(SBP,DBP,age):
     if age >= 18 :
         SBP_score = 0
         if SBP < 130:
@@ -193,11 +193,11 @@ def HT_classification(SBP,DBP):
         return result_BP
     else : pass
 
-def risk_score_HT():
+def risk_score_HT(SBP,DBP,age,weight,height,is_smoke,family_HT,gender):
     risk_score_HT_sum = None
-    if HT_classification(SBP,DBP) == None or age <20 or age >80:
+    if HT_classification(SBP,DBP,age) == None or age <20 or age >80:
         pass
-    elif HT_classification(SBP,DBP)[1]<3 and 20 <=age <=80 :
+    elif HT_classification(SBP,DBP,age)[1]<3 and 20 <=age <=80 :
         risk_score_HT_sum = 0
         if  gender == "female" :
             risk_score_HT_sum += 1
@@ -363,12 +363,12 @@ def converter_score_to_percentrisk_HT(risk_score_HT_sum):
         raise ValueError("Invalid SUM Score")
 
 
-def is_must_lifestylemodification_HT():
-    if risk_score_HT() is not None:
-        if risk_score_HT() > 10 or  HT_classification(SBP,DBP)[1] >= 3 :
+def is_must_lifestylemodification_HT(SBP,DBP,age,weight,height,is_smoke,family_HT,gender):
+    if risk_score_HT(SBP,DBP,age,weight,height,is_smoke,family_HT,gender) is not None:
+        if risk_score_HT(SBP,DBP,age,weight,height,is_smoke,family_HT,gender) > 10 or  HT_classification(SBP,DBP,age)[1] >= 3 :
             return "must "
         else : return "don't need to "
-    elif (risk_score_HT() is None) and (HT_classification(SBP,DBP)[1] >= 3):
+    elif (risk_score_HT(SBP,DBP,age,weight,height,is_smoke,family_HT,gender) is None) and (HT_classification(SBP,DBP,age)[1] >= 3):
         return "must "
     else :
         return "don't need to "
@@ -376,12 +376,12 @@ def is_must_lifestylemodification_HT():
 print("\n")
 #Cardiovascular disease
 
-def risk_factor_CVD():
+def risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age):
     risk_count = 0
-    if is_smoke == True:
+    if is_smoke is True:
         risk_count += 1
     if age >=18 :
-        if HT_classification(SBP,DBP)[1]>=3 or is_HT_medicinetreat == True :
+        if HT_classification(SBP,DBP,age)[1]>=3 or is_HT_medicinetreat == True :
             risk_count += 1
     else : pass
 
@@ -391,7 +391,7 @@ def risk_factor_CVD():
     if HDL >= 60 :
         risk_count += -1
 
-    if  family_CHD == True :
+    if  family_CHD is True :
         risk_count += 1
 
     if gender == "male" and age >= 45:
@@ -403,8 +403,8 @@ def risk_factor_CVD():
     
     
 
-def risk_score_CVD() : #Framimgham point score
-    if 20 <= age <80 and (risk_factor_CVD() >= 2 or is_CHD == True):
+def risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD) : #Framimgham point score
+    if 20 <= age <80 and (risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age) >= 2 or is_CHD == True):
         risk_score_CVD_sum = 0
         if gender == "male" :
             if 20 <= age < 35 :
@@ -665,7 +665,7 @@ def risk_score_CVD() : #Framimgham point score
         return risk_score_CVD_sum
     else : pass
     
-def converter_score_to_percentrisk_CVD(risk_score_CVD_sum):
+def converter_score_to_percentrisk_CVD(risk_score_CVD_sum,gender):
     if gender == "male":
         if risk_score_CVD_sum <0:
             risk_score_CVD_sum = "<0"
@@ -726,13 +726,13 @@ def converter_score_to_percentrisk_CVD(risk_score_CVD_sum):
 
 
 
-def is_must_lifestylemodification_CVD():
+def is_must_lifestylemodification_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD,LDL,FBS,twoHr_postprandial,HbA1c):
     if age >=20 :
-        if risk_factor_CVD() <=1 and LDL >=160 :
+        if risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age) <=1 and LDL >=160 :
             return "must "
-        elif risk_factor_CVD() >=2 and risk_score_CVD() <=15 and LDL >=130 :
+        elif risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age) >=2 and risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD) <=15 and LDL >=130 :
             return "must "
-        elif is_CHD == True or is_DM() == True or (risk_factor_CVD() >=2 and risk_score_CVD() >15 and LDL >=100 ):
+        elif is_CHD == True or is_DM(FBS,twoHr_postprandial,HbA1c) == True or (risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age) >=2 and risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD) >15 and LDL >=100 ):
             return "must "
         else : 
             return "don't need to "
@@ -776,39 +776,39 @@ def is_must_lifestylemodification_CVD():
 # else: pass
 
 
-if age>=18 :
-    st.subheader("======BMI======")
-    st.markdown("BMI = ",round(BMI_calculation (weight,height),2))
-    st.markdown("BMI Class = ",BMI_classification(BMI_calculation (weight,height)))
-    st.markdown("Weight management plan = ",is_must_weight_managment(BMI_calculation (weight,height)))
-    st.markdown("\n")
-    st.subheader("======DM======")
-    st.markdown("is DM = ",is_DM())
-    if is_DM() == False: #ไม่เป็นเบาหวาน ความเสี่ยงต้องโชว์ 
-        st.markdown("Risk factor DM =" ,risk_factor_DM(BMI_calculation(weight,height)))
-        st.markdown("Risk score DM =" ,risk_score_DM(BMI_calculation(weight,height)))
-        if (risk_score_DM(BMI_calculation(weight,height)) is not None) :   #if the 'risk_score_DM' has a value
-            st.markdown("ระดับความเสี่ยงต่อโรคเบาหวานใน 12 ปีข้างหน้า ของท่าน ",converter_score_to_percentrisk_DM(risk_score_DM(BMI_calculation(weight,height))))
-    else: pass  #เป็นเบาหวาน ความเสี่ยงต้องไม่โชว์ 
-    st.markdown(Lab_fasting_DM())
-    st.markdown("DM Lifestyle modification = ",is_must_lifestylemodification_DM())
-    st.markdown("\n")
-    st.subheader("======HT======")
-    st.markdown("HT classification = ",HT_classification(SBP,DBP)[0])
-    st.markdown("Risk score HT = ",risk_score_HT())
-    if risk_score_HT() is not None :
-        st.markdown(f"Predict 4-year hypertension risk: {converter_score_to_percentrisk_HT(risk_score_HT())[0]}%")
-        st.markdown(f"Risk level of HT: {converter_score_to_percentrisk_HT(risk_score_HT())[1]}")
-    else: pass
-    st.markdown("HT Lifestyle modification = ",is_must_lifestylemodification_HT())
-    st.markdown("\n")
-    st.subheader("======CVD======")
-    if age >=20:
-        if is_CHD == False:
-            st.markdown("Risk factor CVD = ",risk_factor_CVD())
-            st.markdown("Risk score CVD = ",risk_score_CVD())
-            if risk_score_CVD() is not None :
-                st.markdown(f"Predict 10-year CVD risk: {converter_score_to_percentrisk_CVD(risk_score_CVD())}%")
-        st.markdown("CVD Lifestyle modification = ",is_must_lifestylemodification_CVD())
-    else: st.markdown("CVD Lifestyle modification = ",is_must_lifestylemodification_CVD())
-else: pass
+# if age>=18 :
+#     st.subheader("======BMI======")
+#     st.markdown("BMI = ",round(BMI_calculation (weight,height),2))
+#     st.markdown("BMI Class = ",BMI_classification(BMI_calculation (weight,height)))
+#     st.markdown("Weight management plan = ",is_must_weight_managment(BMI_calculation (weight,height)))
+#     st.markdown("\n")
+#     st.subheader("======DM======")
+#     st.markdown("is DM = ",is_DM())
+#     if is_DM() == False: #ไม่เป็นเบาหวาน ความเสี่ยงต้องโชว์ 
+#         st.markdown("Risk factor DM =" ,risk_factor_DM(BMI_calculation(weight,height)))
+#         st.markdown("Risk score DM =" ,risk_score_DM(BMI_calculation(weight,height)))
+#         if (risk_score_DM(BMI_calculation(weight,height)) is not None) :   #if the 'risk_score_DM' has a value
+#             st.markdown("ระดับความเสี่ยงต่อโรคเบาหวานใน 12 ปีข้างหน้า ของท่าน ",converter_score_to_percentrisk_DM(risk_score_DM(BMI_calculation(weight,height))))
+#     else: pass  #เป็นเบาหวาน ความเสี่ยงต้องไม่โชว์ 
+#     st.markdown(Lab_fasting_DM())
+#     st.markdown("DM Lifestyle modification = ",is_must_lifestylemodification_DM())
+#     st.markdown("\n")
+#     st.subheader("======HT======")
+#     st.markdown("HT classification = ",HT_classification(SBP,DBP)[0])
+#     st.markdown("Risk score HT = ",risk_score_HT())
+#     if risk_score_HT() is not None :
+#         st.markdown(f"Predict 4-year hypertension risk: {converter_score_to_percentrisk_HT(risk_score_HT())[0]}%")
+#         st.markdown(f"Risk level of HT: {converter_score_to_percentrisk_HT(risk_score_HT())[1]}")
+#     else: pass
+#     st.markdown("HT Lifestyle modification = ",is_must_lifestylemodification_HT())
+#     st.markdown("\n")
+#     st.subheader("======CVD======")
+#     if age >=20:
+#         if is_CHD == False:
+#             st.markdown("Risk factor CVD = ",risk_factor_CVD())
+#             st.markdown("Risk score CVD = ",risk_score_CVD())
+#             if risk_score_CVD() is not None :
+#                 st.markdown(f"Predict 10-year CVD risk: {converter_score_to_percentrisk_CVD(risk_score_CVD())}%")
+#         st.markdown("CVD Lifestyle modification = ",is_must_lifestylemodification_CVD())
+#     else: st.markdown("CVD Lifestyle modification = ",is_must_lifestylemodification_CVD())
+# else: pass

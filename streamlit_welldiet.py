@@ -1,16 +1,17 @@
 import streamlit as st
+from welldiet_assessment import *
+
 st.title('Well Diet')
 st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
 st.caption('by :blue[INVITRACE] เมย์ สรัลชนา')
  #INPUT
 
 with st.form("my_form"):
-    st.write("Inside the form")
     # Every form must have a submit button.
     gender = st.selectbox('Gender',['male','female'])
     age = st.slider('Age', 18,120)
     current_weight = st.number_input('Current Weight (kg)')
-    height = st.number_input('Height (cm)')
+    height = st.number_input('Height (cm)',100,250)
     waist = st.number_input('Waist (inches)')
     TG = st.number_input('Triglyceride (mg/dL)')
     HDL = st.number_input('HDL (mg/dL)')
@@ -84,13 +85,62 @@ with st.form("my_form"):
     is_smoke = st.radio("คุณสูบบุหรี่หรือไม่",("Yes", "No"))
     is_smoke = mapping[is_smoke]    #คุณสูบบุหรี่หรือไม่
     is_CHD = is_CVD                     #มีอาการ CHDไหม ให้ถือว่า CHD = CVD ATPIII ก็ไม่ต้องถามเรื่องCHD แล้ว
+    weight = current_weight
     # ห้ามอายุน้อยกว่า 18
     submitted = st.form_submit_button("Submit")
-    if submitted:
-        st.write("slider")
 
-    # physical_activity="moderately active"
-    # # goal_weight=60
-    # current_food_record= 1600   #kcal
-    #cd /Users/may/Desktop/welldiet.py/ 
-    #streamlit run streamlit_welldiet.py
+if submitted:
+    st.write("ผลการประเมินความเสี่ยงโรคเรื้อรัง")
+    # height = float(height)
+    # weight = float(weight)
+    # print(round(BMI_calculation(weight,height),2))
+    if age>=18 :
+        st.subheader("======BMI======")
+        #st.markdown(body="a",unsafe_allow_html="b")
+        st.markdown(f"BMI = {round(BMI_calculation(weight,height),2)}")
+        st.markdown(f"BMI Class = {BMI_classification(weight,height)}")
+        st.markdown(f"weight management plan = {str(is_must_weight_managment(weight,height))}")
+        st.markdown("\n")
+        st.subheader("======DM======")
+        st.markdown("is DM = ", is_DM(FBS,twoHr_postprandial,HbA1c))
+        if is_DM(FBS,twoHr_postprandial,HbA1c) == False: #ไม่เป็นเบาหวาน ความเสี่ยงต้องโชว์ 
+            st.markdown(f"Risk factor DM = {risk_factor_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS)}  ")
+            st.markdown(f"Risk score DM = {risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM)}  ")
+            if (risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM) is not None) :   #if the 'risk_score_DM' has a value
+                st.markdown(f"ระดับความเสี่ยงต่อโรคเบาหวานใน 12 ปีข้างหน้า ของท่าน {converter_score_to_percentrisk_DM(weight,height,age,gender,waist,is_HT,family_DM)} ")
+        else: pass  #เป็นเบาหวาน ความเสี่ยงต้องไม่โชว์ 
+        st.markdown(Lab_fasting_DM(FBS,fastingDTX))
+        st.markdown(f"DM Lifestyle modification = {is_must_lifestylemodification_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS,FBS,fastingDTX)}")
+        st.markdown("\n")
+        st.subheader("======HT======")
+        st.markdown(f"HT classification = {HT_classification(SBP,DBP,age)[0]}")
+        st.markdown(f"Risk score HT = {risk_score_HT(SBP,DBP,age,weight,height,is_smoke,family_HT,gender)}")
+        if risk_score_HT(SBP,DBP,age,weight,height,is_smoke,family_HT,gender) is not None :
+            st.markdown(f"Predict 4-year hypertension risk: {converter_score_to_percentrisk_HT(risk_score_HT(SBP,DBP,age,weight,height,is_smoke,family_HT,gender))[0]}%")
+            st.markdown(f"Risk level of HT: {converter_score_to_percentrisk_HT(risk_score_HT(SBP,DBP,age,weight,height,is_smoke,family_HT,gender))[1]}")
+        else: pass
+        st.markdown(f"HT Lifestyle modification = {is_must_lifestylemodification_HT(SBP,DBP,age,weight,height,is_smoke,family_HT,gender)}")
+        st.markdown("\n")
+        st.subheader("======CVD======")
+        if age >=20:
+            if is_CHD == False:
+                st.markdown(f"Risk factor CVD = {risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age)}")
+                st.markdown(f"Risk score CVD = {risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD)}")
+                if risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD) is not None :
+                    st.markdown(f"Predict 10-year CVD risk: {converter_score_to_percentrisk_CVD(risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD))}%")
+            st.markdown(f"CVD Lifestyle modification = {is_must_lifestylemodification_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD,LDL,FBS,twoHr_postprandial,HbA1c)}")
+        else: st.markdown(f"CVD Lifestyle modification = {is_must_lifestylemodification_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD,LDL,FBS,twoHr_postprandial,HbA1c)}")
+    else: 
+        pass
+  
+
+
+
+    # # physical_activity="moderately active"
+    # # # goal_weight=60
+    # # current_food_record= 1600   #kcal
+
+
+
+    # #cd /Users/may/Desktop/welldiet.py/ 
+    # #streamlit run streamlit_welldiet.py
