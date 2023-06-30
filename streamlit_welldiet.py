@@ -102,7 +102,7 @@ if submitted:
         st.markdown(f"weight management plan = {str(is_must_weight_managment(weight,height))}")
         st.markdown("\n")
         st.subheader("======DM======")
-        st.markdown("is DM = ", is_DM(FBS,twoHr_postprandial,HbA1c))
+        st.markdown(f"is DM =  {is_DM(FBS,twoHr_postprandial,HbA1c)}")
         if is_DM(FBS,twoHr_postprandial,HbA1c) == False: #ไม่เป็นเบาหวาน ความเสี่ยงต้องโชว์ 
             st.markdown(f"Risk factor DM = {risk_factor_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS)}  ")
             st.markdown(f"Risk score DM = {risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM)}  ")
