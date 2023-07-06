@@ -665,10 +665,11 @@ def risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP
         return risk_score_CVD_sum
     else : pass
     
-def converter_score_to_percentrisk_CVD(risk_score_CVD_sum,gender):
+def converter_score_to_percentrisk_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD):
+    risk_score_CVD_sum_result =risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD)
     if gender == "male":
-        if risk_score_CVD_sum <0:
-            risk_score_CVD_sum = "<0"
+        if risk_score_CVD_sum_result <0:
+            risk_score_CVD_sum_result = "<0"
         mappings = {
             "<0": "<1",
             0: 1,
@@ -691,10 +692,10 @@ def converter_score_to_percentrisk_CVD(risk_score_CVD_sum,gender):
             17: ">=30"
         }
     elif gender == "female":
-        if risk_score_CVD_sum <9:
-            risk_score_CVD_sum = "<9"
-        elif risk_score_CVD_sum >=25:
-            risk_score_CVD_sum = ">=25"
+        if risk_score_CVD_sum_result <9:
+            risk_score_CVD_sum_result = "<9"
+        elif risk_score_CVD_sum_result >=25:
+            risk_score_CVD_sum_result = ">=25"
         mappings = {
             "<9": "<1",
             9: 1,
@@ -718,8 +719,8 @@ def converter_score_to_percentrisk_CVD(risk_score_CVD_sum,gender):
     else:
         raise ValueError("Invalid gender")
 
-    if risk_score_CVD_sum in mappings:
-        return mappings[risk_score_CVD_sum]
+    if risk_score_CVD_sum_result in mappings:
+        return mappings[risk_score_CVD_sum_result]
     else:
         raise ValueError("Invalid SUM Score")
 

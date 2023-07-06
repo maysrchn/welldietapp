@@ -9,8 +9,8 @@ import datetime
 import sys
 
 
-if goal_weight > current_weight:
-    print("Note :This is weight loss program, please set goal weight lower than current weight")
+if goal_weight < current_weight:
+    print("Note :This is weight gain program, please set goal weight upper than current weight")
     # sys.exit()
 def weight_loss_program(age, gender, height, current_weight, physical_activity, goal_weight):
     # Calculate BMR using the Mifflin-St Jeor equation

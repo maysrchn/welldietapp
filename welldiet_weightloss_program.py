@@ -98,7 +98,7 @@ calories_factor_goal = [1.5, 1.375, 1.25, 1.125, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4
 
 
 # Find the index of the calories factor goal that eat_over_or_under_factor falls between
-if weight_loss_rate >= 0.5:
+if weight_loss_rate > 0.5:
     calories_factor_goal = eat_over_or_under_factor
     budget = current_food_record * calories_factor_goal
     daily_calories_budget=[budget]
@@ -203,7 +203,7 @@ while weightloss_list[-1]>goal_weight:
         break
     if weightloss_list[-1]<=goal_weight:
         break
-    if weightloss_list[-1]>weightloss_list[0]*1.05:
+    if weightloss_list[-1]>weightloss_list[0]*1.1:
         break
 
 # for i in range (1,365) :

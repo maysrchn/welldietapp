@@ -34,6 +34,7 @@ with st.form("my_form"):
     family_DM = st.radio(
         "มี พ่อ แม่ พี่ หรือ น้อง เป็นโรคเบาหวาน?",
         ("Yes", "No")
+
     )                  #มี พ่อ แม่ พี่ หรือ น้อง เป็นโรคเบาหวาน
     family_DM = mapping[family_DM]
 
@@ -127,7 +128,7 @@ if submitted:
                 st.markdown(f"Risk factor CVD = {risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age)}")
                 st.markdown(f"Risk score CVD = {risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD)}")
                 if risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD) is not None :
-                    st.markdown(f"Predict 10-year CVD risk: {converter_score_to_percentrisk_CVD(risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD))}%")
+                    st.markdown(f"Predict 10-year CVD risk: {converter_score_to_percentrisk_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD)}%")
             st.markdown(f"CVD Lifestyle modification = {is_must_lifestylemodification_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD,LDL,FBS,twoHr_postprandial,HbA1c)}")
         else: st.markdown(f"CVD Lifestyle modification = {is_must_lifestylemodification_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD,LDL,FBS,twoHr_postprandial,HbA1c)}")
     else: 
@@ -136,9 +137,9 @@ if submitted:
 
 
 
-    # # physical_activity="moderately active"
-    # # # goal_weight=60
-    # # current_food_record= 1600   #kcal
+# physical_activity="moderately active"
+# goal_weight=60
+# current_food_record= 2400   #kcal
 
 
 

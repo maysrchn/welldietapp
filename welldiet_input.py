@@ -30,4 +30,4 @@ is_CHD = is_CVD                     #มีอาการ CHDไหม ให�
 
 physical_activity="moderately active"
 goal_weight=60
-current_food_record= 1600   #kcal
+current_food_record= 2600   #kcal
