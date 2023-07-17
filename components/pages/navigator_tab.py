@@ -16,7 +16,7 @@
 #     return selected
 
 import streamlit as st
-import hydralit as hc
+import hydralit_components as hc
 
 # # specify the primary menu definition
 # def streamlit_menu():
