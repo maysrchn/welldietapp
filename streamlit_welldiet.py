@@ -92,9 +92,6 @@ with st.form("my_form"):
 
 if submitted:
     st.write("ผลการประเมินความเสี่ยงโรคเรื้อรัง")
-    # height = float(height)
-    # weight = float(weight)
-    # print(round(BMI_calculation(weight,height),2))
     if age>=18 :
         st.subheader("======BMI======")
         #st.markdown(body="a",unsafe_allow_html="b")
