@@ -16,7 +16,7 @@
 #     return selected
 
 import streamlit as st
-import hydralit_components as hc
+import hydralit as hc
 
 # # specify the primary menu definition
 # def streamlit_menu():
@@ -68,5 +68,5 @@ def streamlit_menu():
         #         st.info('You clicked at: {}'.format(datetime.datetime.now()))
 
         #get the id of the menu item clicked
-        
+
         return menu_id
