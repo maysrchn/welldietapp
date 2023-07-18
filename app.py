@@ -10,7 +10,7 @@ from components.pages.weight_management import weightcontrol_form
 from components.pages.ht_screener import HypertensionScreener
 from components.pages.cvd_screener import CVDScreener
 from components.pages.diabetes import diabetes_risk_score_form
-
+from RiskEngine.welldiet_weightloss_program import weight_loss_module
 
 #make it look nice from the start
 st.set_page_config(layout='wide')
@@ -100,6 +100,9 @@ if viewresult:
                     st.markdown(f"ระดับความเสี่ยงโรคหลอดเลือดหัวใจ ในอีก 10 ปีข้างหน้า = {converter_score_to_percentrisk_CVD(st.session_state.age,st.session_state.gender,st.session_state.is_CVD,st.session_state.TC,st.session_state.is_smoke,st.session_state.HDL,st.session_state.is_HT_medicinetreat,st.session_state.SBP,st.session_state.DBP,st.session_state.family_CHD)}%")
             st.markdown(f"การปรับวิถีชีวิตเพื่อควบคุมโรคหลอดเลือดหัวใจ = {is_must_lifestylemodification_CVD(st.session_state.age,st.session_state.gender,st.session_state.is_CVD,st.session_state.TC,st.session_state.is_smoke,st.session_state.HDL,st.session_state.is_HT_medicinetreat,st.session_state.SBP,st.session_state.DBP,st.session_state.family_CHD,st.session_state.LDL,st.session_state.FBS,st.session_state.twoHr_postprandial,st.session_state.HbA1c)}")
         else: st.markdown(f"การปรับวิถีชีวิตเพื่อควบคุมโรคหลอดเลือดหัวใจ = {is_must_lifestylemodification_CVD(st.session_state.age,st.session_state.gender,st.session_state.is_CVD,st.session_state.TC,st.session_state.is_smoke,st.session_state.HDL,st.session_state.is_HT_medicinetreat,st.session_state.SBP,st.session_state.DBP,st.session_state.family_CHD,st.session_state.LDL,st.session_state.FBS,st.session_state.twoHr_postprandial,st.session_state.HbA1c)}")
+        if st.session_state.goal_weight < st.session_state.current_weight :
+            weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)
+        else : pass ####
     else: 
         pass
 
