@@ -79,7 +79,7 @@ def initialize_state():
     if "history_impaired_glucose" not in st.session_state:
         st.session_state.history_impaired_glucose = False
     if "is_CVD" not in st.session_state:
-        st.session_state.is_CVD = True
+        st.session_state.is_CVD = False
     if "is_CVD_yes_no" not in st.session_state:
         st.session_state.is_CVD_yes_no = "No"
 

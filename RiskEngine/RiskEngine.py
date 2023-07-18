@@ -53,37 +53,37 @@ def is_must_weight_managment(weight,height):
         return "Caloric Boost Up"
 #Diabetes
 #risk more than 1 from 8
-def risk_factor_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS):
-    if age <18 :
-        risk_count = None
-    elif age >=18:
-        risk_count = 0
+# def risk_factor_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS):
+#     if age <18 :
+#         risk_count = None
+#     elif age >=18:
+#         risk_count = 0
 
-        if age >= 35:
-            risk_count += 1
+#         if age >= 35:
+#             risk_count += 1
         
-        if (BMI_calculation (weight,height) >= 25 or waist_calculation(gender, waist)) and family_DM:
-            risk_count += 1
+#         if (BMI_calculation (weight,height) >= 25 or waist_calculation(gender, waist)) and family_DM:
+#             risk_count += 1
 
-        if is_HT == True or is_HT_medicinetreat == True:
-            risk_count += 1
+#         if is_HT == True or is_HT_medicinetreat == True:
+#             risk_count += 1
         
-        if TG > 250 or HDL < 35:
-            risk_count += 1
+#         if TG > 250 or HDL < 35:
+#             risk_count += 1
         
-        if history_GDM_Macrosomia == True:
-            risk_count += 1
+#         if history_GDM_Macrosomia == True:
+#             risk_count += 1
         
-        if history_impaired_glucose == True:
-            risk_count += 1
+#         if history_impaired_glucose == True:
+#             risk_count += 1
         
-        if is_CVD == True:
-            risk_count += 1
+#         if is_CVD == True:
+#             risk_count += 1
 
-        if is_PCOS == True:
-            risk_count += 1
+#         if is_PCOS == True:
+#             risk_count += 1
 
-    return risk_count
+#     return risk_count
 
 #DM risk score
 
@@ -149,13 +149,13 @@ def converter_score_to_percentrisk_DM(weight,height,age,gender,waist,is_HT,famil
         percentrisk_DM = "มากกว่า 11% - 20%"
     return percentrisk_DM
 
-def is_must_lifestylemodification_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS,FBS,fastingDTX):
+def is_must_lifestylemodification_DM(weight,height,age,gender,waist,family_DM,is_HT,FBS,fastingDTX):
     if age>=34 :
-        if risk_factor_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS) > 0 or risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM) >= 6 or Lab_fasting_DM(FBS,fastingDTX) == "lab DM abnormal":
+        if risk_score_DM(weight,height,age,gender,waist,is_HT,family_DM) >= 6 or Lab_fasting_DM(FBS,fastingDTX) == "lab DM abnormal":
             return "must"
         else : return "don't need to"
     if age < 34 :
-        if risk_factor_DM(weight,height,age,gender,waist,family_DM,is_HT,is_HT_medicinetreat,TG,HDL,history_GDM_Macrosomia,history_impaired_glucose,is_CVD,is_PCOS) > 0 or Lab_fasting_DM(FBS,fastingDTX) == "lab DM abnormal":
+        if Lab_fasting_DM(FBS,fastingDTX) == "lab DM abnormal":
             return "must"
         else : return "don't need to"
 
@@ -743,11 +743,11 @@ def converter_score_to_percentrisk_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_m
 def is_must_lifestylemodification_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD,LDL,FBS,twoHr_postprandial,HbA1c):
     if age >=20 :
         if risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age) <=1 and LDL >=160 :
-            return "must "
+            return "must a"
         elif risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age) >=2 and risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD) <=15 and LDL >=130 :
-            return "must "
+            return "must b"
         elif is_CHD == True or is_DM(FBS,twoHr_postprandial,HbA1c) == True or (risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age) >=2 and risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD) >15 and LDL >=100 ):
-            return "must "
+            return "must c"
         else : 
             return "don't need to "
     else : pass
