@@ -117,5 +117,9 @@ def initialize_state():
     if "diabetes_risk_score_form_submitted" not in st.session_state:
         st.session_state.diabetes_risk_score_form_submitted = 0
 
+    if "viewresult_button" not in st.session_state:
+        st.session_state.viewresult_button = False
+    if "back_button" not in st.session_state:
+        st.session_state.back_button = False
 
 

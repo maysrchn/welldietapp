@@ -43,6 +43,7 @@ import hydralit_components as hc
 
 
 def streamlit_menu():
+        # menu_id_list=['Profile','BMI','Weight Control','Hypertension','Cardiovascular','Diabetes']
         # specify the primary menu definition
         menu_data = [
         {'id':'Profile','icon': "bi bi-person-fill", 'label':"Profile"},

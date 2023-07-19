@@ -1,4 +1,4 @@
-from welldiet_input import*
+import streamlit as st
 # import matplotlib.pyplot as plt
 import datetime
 import sys
@@ -67,8 +67,8 @@ def weight_loss_module(age, gender, height, current_weight, physical_activity, g
         
         # Print output
         st.markdown("======== weight loss profile ===========")
-        st.markdown(f"TDEE: {tdee} kcal")
-        st.markdown(f"BMR: {bmr} kcal")
+        st.markdown(f"TDEE: {round(tdee)} kcal")
+        st.markdown(f"BMR: {round(bmr)} kcal")
         # st.markdown(f"Goal date: {goal_date.strftime('%Y-%m-%d')}")
         # st.markdown(f"Length of time: {years} years, {months} months, {days} days")
         # st.markdown(f"Number of weeks : {weeks_to_lose_weight}")

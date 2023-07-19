@@ -17,4 +17,5 @@ def demographic_form():
             st.slider('Age', 18,120,key="age_input",value=st.session_state['age'])
         if st.form_submit_button("Submit",on_click=on_click):
             st.session_state['profile_form_submitted'] += 1
+            
 

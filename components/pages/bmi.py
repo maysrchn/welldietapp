@@ -12,6 +12,7 @@ def bmi_form():
         if st.form_submit_button("Submit",on_click=on_click):
             st.session_state['bmi_form_submitted'] += 1
             
+            
 
 
 
