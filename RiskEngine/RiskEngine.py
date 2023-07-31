@@ -743,11 +743,11 @@ def converter_score_to_percentrisk_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_m
 def is_must_lifestylemodification_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD,LDL,FBS,twoHr_postprandial,HbA1c):
     if age >=20 :
         if risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age) <=1 and LDL >=160 :
-            return "must a"
+            return "must"
         elif risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age) >=2 and risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD) <=15 and LDL >=130 :
-            return "must b"
+            return "must"
         elif is_CHD == True or is_DM(FBS,twoHr_postprandial,HbA1c) == True or (risk_factor_CVD(is_smoke,SBP,DBP,is_HT_medicinetreat,HDL,family_CHD,gender,age) >=2 and risk_score_CVD(age,gender,is_CHD,TC,is_smoke,HDL,is_HT_medicinetreat,SBP,DBP,family_CHD) >15 and LDL >=100 ):
-            return "must c"
+            return "must"
         else : 
             return "don't need to "
     else : pass

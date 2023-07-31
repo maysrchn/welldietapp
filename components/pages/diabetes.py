@@ -20,4 +20,3 @@ def diabetes_risk_score_form():
             st.session_state['diabetes_risk_score_form_submitted'] += 1
 
 
-st.session_state.family_DM=yes_no_converter(st.session_state.family_DM_yes_no)

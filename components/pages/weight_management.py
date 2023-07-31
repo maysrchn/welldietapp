@@ -13,4 +13,3 @@ def weightcontrol_form():
         st.number_input('Average Food Record (kcal)',key="current_food_record_input",value=st.session_state['current_food_record'])
         if st.form_submit_button("Submit",on_click=on_click):
             st.session_state['weightcontrol_form_submitted'] += 1
-            

@@ -122,4 +122,5 @@ def initialize_state():
     if "back_button" not in st.session_state:
         st.session_state.back_button = False
 
-
+    if "initial_screen" not in st.session_state:
+        st.session_state.initial_screen = 0
