@@ -89,11 +89,14 @@ def viewresult():
                 st.markdown(weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[8])
 
         with col2:
-            st.subheader(is_must_lifestylemodification_DM(st.session_state.current_weight,st.session_state.height,st.session_state.age,st.session_state.gender,st.session_state.waist,st.session_state.family_DM,st.session_state.is_HT,st.session_state.FBS,st.session_state.fastingDTX))
+            st.subheader("Diabetes  \nLifestyle Modification")
+            st.markdown(is_must_lifestylemodification_DM(st.session_state.current_weight,st.session_state.height,st.session_state.age,st.session_state.gender,st.session_state.waist,st.session_state.family_DM,st.session_state.is_HT,st.session_state.FBS,st.session_state.fastingDTX))
         with col3:
-            st.subheader(is_must_lifestylemodification_CVD(st.session_state.age,st.session_state.gender,st.session_state.is_CVD,st.session_state.TC,st.session_state.is_smoke,st.session_state.HDL,st.session_state.is_HT_medicinetreat,st.session_state.SBP,st.session_state.DBP,st.session_state.family_CHD,st.session_state.LDL,st.session_state.FBS,st.session_state.twoHr_postprandial,st.session_state.HbA1c))
+            st.subheader("Cardiovascular  \nLifestyle Modification")
+            st.markdown(is_must_lifestylemodification_CVD(st.session_state.age,st.session_state.gender,st.session_state.is_CVD,st.session_state.TC,st.session_state.is_smoke,st.session_state.HDL,st.session_state.is_HT_medicinetreat,st.session_state.SBP,st.session_state.DBP,st.session_state.family_CHD,st.session_state.LDL,st.session_state.FBS,st.session_state.twoHr_postprandial,st.session_state.HbA1c))
         with col4:
-            st.subheader(is_must_lifestylemodification_HT(st.session_state.SBP,st.session_state.DBP,st.session_state.age,st.session_state.current_weight,st.session_state.height,st.session_state.is_smoke,st.session_state.family_HT,st.session_state.gender))
+            st.subheader("Hypertension  \nLifestyle Modification")
+            st.markdown(is_must_lifestylemodification_HT(st.session_state.SBP,st.session_state.DBP,st.session_state.age,st.session_state.current_weight,st.session_state.height,st.session_state.is_smoke,st.session_state.family_HT,st.session_state.gender))
 
 
 
