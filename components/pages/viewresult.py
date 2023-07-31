@@ -16,11 +16,15 @@ def viewresult():
         col1,col2 = st.columns(2)
         with col1:
             st.markdown("พลังงานที่ใช้ไปใน 1 วัน (TDEE)")
-            st.subheader(f":red[{weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[0]}]")
+            if st.session_state.goal_weight < st.session_state.current_weight :
+                st.subheader(f":red[{weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[0]}]")
+            else: st.subheader(f":red[{weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[0]}]")
             st.markdown("kcal")
         with col2:
             st.markdown("พลังงานพื้นฐานที่ร่างกายจำเป็นต้องได้รับในแต่ละวัน (BMR)")
-            st.subheader(f"{weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[1]}")
+            if st.session_state.goal_weight < st.session_state.current_weight :
+                st.subheader(f"{weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[1]}")
+            else: st.subheader(f"{weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[1]}")
             st.markdown("kcal")
         st.subheader(":red[ผลการประเมินความเสี่ยงโรคเรื้อรัง]")
         col1, col2, col3 ,col4= st.columns(4)
@@ -69,7 +73,8 @@ def viewresult():
                 st.markdown(weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[3])
                 st.markdown(weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[4])
                 st.markdown(weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[5])
-                st.markdown(weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[6])
+                st.markdown("A.I. Stepping Calories Goal  \ndecrease week by week")
+                st.markdown('  \n'.join(weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[6]))
                 st.markdown(weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[7])
                 st.markdown(weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[8])
             
@@ -78,7 +83,8 @@ def viewresult():
                 st.markdown(weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[3])
                 st.markdown(weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[4])
                 st.markdown(weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[5])
-                st.markdown(weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[6])
+                st.markdown("A.I. Stepping Calories Goal  \nincrease week by week")
+                st.markdown('  \n'.join(weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[6]))
                 st.markdown(weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[7])
                 st.markdown(weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[8])
 

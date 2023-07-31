@@ -55,19 +55,19 @@ def weight_gain_module(age, gender, height, current_weight, physical_activity, g
         goal_calorie_budget = tdee + (weight_loss_rate * 7700 / 7)
         
         error1=None
-        # Adjust weight loss rate if daily calorie budget is below BMR
-        while goal_calorie_budget < bmr: #######################
-            weight_loss_rate -= 0.02
-            weeks_to_lose_weight = total_weight_loss / weight_loss_rate
-            goal_date = datetime.datetime.now() + datetime.timedelta(weeks=weeks_to_lose_weight)
-            time_delta = goal_date - datetime.datetime.now()
-            years = time_delta.days // 365
-            months = (time_delta.days % 365) // 30
-            days = (time_delta.days % 365) % 30
-            goal_calorie_budget = tdee - (weight_loss_rate * 7700 / 7)
-            if weight_loss_rate <= 0:
-                error1 ="Unable to achieve the goal weight within the specified BMI range."
-                return None
+        # # Adjust weight loss rate if daily calorie budget is below BMR
+        # while goal_calorie_budget < bmr: #######################
+        #     weight_loss_rate -= 0.02
+        #     weeks_to_lose_weight = total_weight_loss / weight_loss_rate
+        #     goal_date = datetime.datetime.now() + datetime.timedelta(weeks=weeks_to_lose_weight)
+        #     time_delta = goal_date - datetime.datetime.now()
+        #     years = time_delta.days // 365
+        #     months = (time_delta.days % 365) // 30
+        #     days = (time_delta.days % 365) % 30
+        #     goal_calorie_budget = tdee - (weight_loss_rate * 7700 / 7)
+        #     if weight_loss_rate <= 0:
+        #         error1 ="Unable to achieve the goal weight within the specified BMI range."
+        #         return None
         
         # Print output
         # st.markdown("======== weight loss profile ===========")
@@ -84,8 +84,9 @@ def weight_gain_module(age, gender, height, current_weight, physical_activity, g
 
     # Example usage
     list_result=weight_loss_program(age, gender, height, current_weight, physical_activity, goal_weight)
-    if list_result is None : 
-        return None
+
+    # if list_result is None : 
+    #     return None
     tdee = list_result[0]
     bmr = list_result[4]
     activity_factors=list_result[2]
@@ -98,7 +99,7 @@ def weight_gain_module(age, gender, height, current_weight, physical_activity, g
 
     eat_over_or_under_factor = current_food_record / tdee
 
-    calories_factor_goal = [1.750 ,1.625 ,1.5, 1.375, 1.25, 1.125, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
+    calories_factor_goal = [2.25, 2, 1.750 ,1.625 ,1.5, 1.375, 1.25, 1.125, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 
 
 
@@ -112,6 +113,8 @@ def weight_gain_module(age, gender, height, current_weight, physical_activity, g
         if last_week_budget > goal_calorie_budget:
             break
     if current_food_record < bmr:
+            index = daily_calories_budget.index(current_food_record)
+            daily_calories_budget = daily_calories_budget[index:]
             error2="current food record is below than BMR"
     else:
         index = daily_calories_budget.index(current_food_record)
@@ -120,8 +123,8 @@ def weight_gain_module(age, gender, height, current_weight, physical_activity, g
 
 
 
-    if  current_food_record < bmr:
-        return None
+    # if  current_food_record < bmr:
+    #     return None
 
     weekly_goal_list=[]
     # Adjust the last week's budget to match the goal calorie budget
@@ -221,7 +224,7 @@ def weight_gain_module(age, gender, height, current_weight, physical_activity, g
     days = day_list_weightloss[-1]
     years, months, days = convert_days_to_length_of_time(days)
     # st.markdown(f"Length of time Actually: {years} years, {months} months, {days} days")
-    return round(tdee),round(bmr),"For weight gain",(f"Goal calorie budget: \n {round(goal_calorie_budget)} kcal"),(f"Total weight loss: \n {total_weight_loss} kg"),(f"Weight loss rate per week: \n {round(weight_loss_rate,2)} kg/week"),weekly_goal_list,(f"number of days \n {day_list_weightloss[-1]} days"),(f"Length of time Actually  \n {years} years, {months} months, {days} days"),error0,error1,error2
+    return round(tdee),round(bmr),"For weight gain",(f"Goal calorie budget: \n {round(goal_calorie_budget)} kcal"),(f"Total weight gain: \n {total_weight_loss} kg"),(f"Weight gain rate per week: \n {round(weight_loss_rate,2)} kg/week"),weekly_goal_list,(f"number of days \n {day_list_weightloss[-1]} days"),(f"Length of time Actually  \n {years} years, {months} months, {days} days"),error0,error1,error2
     # plt.plot(day_list_weightloss, weightloss_list)
     # plt.xlabel('day')
     # plt.ylabel('Weight (kg)')

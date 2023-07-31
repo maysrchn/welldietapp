@@ -92,7 +92,7 @@ def weight_loss_module(age, gender, height, current_weight, physical_activity, g
 
     eat_over_or_under_factor = current_food_record / tdee
 
-    calories_factor_goal = [1.5, 1.375, 1.25, 1.125, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
+    calories_factor_goal = [2.25, 2, 1.750 ,1.625 ,1.5, 1.375, 1.25, 1.125, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 
 
 
@@ -119,8 +119,8 @@ def weight_loss_module(age, gender, height, current_weight, physical_activity, g
 
 
 
-    if  current_food_record < bmr:
-        return None
+    # if  current_food_record < bmr:
+    #     return None
 
     weekly_goal_list=[]
     # Adjust the last week's budget to match the goal calorie budget
