@@ -30,7 +30,7 @@ def back_button():
 
 def main():
     st.title('Well Diet')
-    st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
+    st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy heyyyyyyy')
     st.caption('by :blue[INVITRACE] เมย์ สรัลชนา')
     assessment()  # Display the assessment screen initially
     viewresult_button() # Display the View Result button
