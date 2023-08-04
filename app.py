@@ -17,7 +17,7 @@ def viewresult_button():
             st.session_state.viewresult_button = True
         if st.session_state.viewresult_button:
             st.title('Well Diet')
-            st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
+            st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy heyyyyy')
             st.caption('by :blue[INVITRACE] เมย์ สรัลชนา')
             viewresult()
             back_button()
