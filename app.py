@@ -17,7 +17,7 @@ def viewresult_button():
             st.session_state.viewresult_button = True
         if st.session_state.viewresult_button:
             st.title('Well Diet')
-            st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy heyyyyyy')
+            st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
             st.caption('by :blue[INVITRACE] เมย์ สรัลชนา')
             viewresult()
             back_button()
@@ -30,7 +30,7 @@ def back_button():
 
 def main():
     st.title('Well Diet')
-    st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy heyyyyyyy')
+    st.subheader('NCDs Risk Detection and Lifestyle Modification Therapy')
     st.caption('by :blue[INVITRACE] เมย์ สรัลชนา')
     assessment()  # Display the assessment screen initially
     viewresult_button() # Display the View Result button
