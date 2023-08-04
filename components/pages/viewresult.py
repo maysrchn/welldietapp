@@ -16,6 +16,8 @@ def viewresult():
         col1,col2 = st.columns(2)
         with col1:
             st.markdown("พลังงานที่ใช้ไปใน 1 วัน (TDEE)")
+            print(st.session_state.goal_weight)
+            print(st.session_state.current_weight)
             if st.session_state.goal_weight < st.session_state.current_weight :
                 st.subheader(f":red[{weight_loss_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[0]}]")
             else: st.subheader(f":red[{weight_gain_module(st.session_state.age, st.session_state.gender, st.session_state.height, st.session_state.current_weight, st.session_state.physical_activity, st.session_state.goal_weight,st.session_state.current_food_record)[0]}]")
